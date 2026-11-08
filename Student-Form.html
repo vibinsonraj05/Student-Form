@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8f9fc">
+  <title>Student Registration | Application Form</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4f66d8;
+      --primary-hover: #3d53bd;
+      --primary-soft: #f0f3ff;
+      --ink: #202638;
+      --muted: #697386;
+      --line: #e4e8f0;
+      --surface: #ffffff;
+      --page: #f4f6fb;
+      --success: #16845b;
+      --danger: #c43f4f;
+      --shadow: 0 20px 60px rgba(34, 48, 86, .10);
+      --radius: 18px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 40px 20px;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 8% 0%, rgba(111, 139, 255, .13), transparent 34%),
+        radial-gradient(ellipse at 100% 18%, rgba(93, 190, 177, .11), transparent 30%),
+        var(--page);
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    .page {
+      width: min(100%, 780px);
+      margin: 0 auto;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 auto 26px;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      border-radius: 14px;
+      color: #fff;
+      background: linear-gradient(135deg, #7188f0, #4058c3);
+      box-shadow: 0 9px 22px rgba(73, 103, 213, .25);
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .brand-name {
+      color: #242c40;
+      font: 800 17px 'Manrope', sans-serif;
+      letter-spacing: -.35px;
+    }
+
+    .brand-caption {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .form-card {
+      overflow: hidden;
+      border: 1px solid rgba(224, 229, 240, .95);
+      border-radius: 24px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 34px 42px 27px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fff 0%, #fdfdff 100%);
+    }
+
+    .eyebrow {
+      color: var(--primary);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 9px 0 9px;
+      color: #20283b;
+      font: 800 clamp(25px, 4vw, 32px)/1.2 'Manrope', sans-serif;
+      letter-spacing: -1px;
+    }
+
+    .intro {
+      max-width: 580px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .progress-area {
+      padding: 23px 42px 0;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 11px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .progress-track {
+      height: 7px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #edf0f7;
+    }
+
+    .progress-fill {
+      width: 33.333%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #526cdd, #91a3f6);
+      transition: width .35s ease;
+    }
+
+    .step-dots {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .step-dot {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #9aa3b4;
+      font-size: 12px;
+      font-weight: 600;
+      transition: color .2s ease;
+    }
+
+    .step-dot .number {
+      display: grid;
+      place-items: center;
+      width: 27px;
+      height: 27px;
+      flex: 0 0 27px;
+      border: 1px solid #dfe4ee;
+      border-radius: 50%;
+      color: #8791a4;
+      background: #fff;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .step-dot.active {
+      color: var(--primary);
+    }
+
+    .step-dot.active .number {
+      border-color: var(--primary);
+      color: #fff;
+      background: var(--primary);
+      box-shadow: 0 4px 10px rgba(79, 102, 216, .2);
+    }
+
+    .step-dot.completed {
+      color: var(--success);
+    }
+
+    .step-dot.completed .number {
+      border-color: var(--success);
+      color: #fff;
+      background: var(--success);
+    }
+
+    .form-body {
+      min-height: 300px;
+      padding: 32px 42px 36px;
+    }
+
+    .step-panel {
+      display: none;
+      animation: stepEnter .28s ease both;
+    }
+
+    .step-panel.active {
+      display: block;
+    }
+
+    @keyframes stepEnter {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-heading {
+      margin: 0 0 6px;
+      color: #242c40;
+      font: 700 20px 'Manrope', sans-serif;
+      letter-spacing: -.35px;
+    }
+
+    .section-help {
+      margin: 0 0 26px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 21px 18px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    .field > label,
+    .field > .field-label {
+      display: block;
+      margin: 0 0 8px;
+      color: #394257;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .required {
+      color: var(--danger);
+    }
+
+    .field input:not([type="radio"]):not([type="checkbox"]):not([type="file"]),
+    .field select,
+    .field textarea {
+      display: block;
+      width: 100%;
+      min-height: 47px;
+      padding: 11px 13px;
+      border: 1px solid #dfe4ed;
+      border-radius: 11px;
+      outline: none;
+      color: var(--ink);
+      background: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .field textarea {
+      min-height: 112px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: #a3aaba;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: #8298ec;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(79, 102, 216, .10);
+    }
+
+    .field input:disabled,
+    .field select:disabled,
+    .field textarea:disabled {
+      cursor: not-allowed;
+      opacity: .65;
+      background: #f5f6f9;
+    }
+
+    .inline-options {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      min-height: 47px;
+    }
+
+    .option {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      margin: 0;
+      padding: 0 13px;
+      border: 1px solid #e1e6ef;
+      border-radius: 10px;
+      color: #4b5568;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color .2s ease, background .2s ease, color .2s ease;
+    }
+
+    .option:hover {
+      border-color: #b7c3ef;
+      background: #fafbff;
+    }
+
+    .option:has(input:checked) {
+      border-color: #9aabef;
+      color: var(--primary-hover);
+      background: var(--primary-soft);
+    }
+
+    .option input[type="radio"],
+    .option input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      margin: 0;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .phone-row {
+      display: grid;
+      grid-template-columns: 105px minmax(0, 1fr);
+      gap: 10px;
+    }
+
+    .file-box {
+      padding: 18px;
+      border: 1px dashed #b9c5df;
+      border-radius: 13px;
+      background: #fafbff;
+      transition: border-color .2s ease, background .2s ease;
+    }
+
+    .file-box:focus-within {
+      border-color: #8298ec;
+      background: #f7f8ff;
+    }
+
+    input[type="file"] {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      color: var(--muted);
+      font: 13px 'DM Sans', sans-serif;
+    }
+
+    input[type="file"]::file-selector-button {
+      margin-right: 12px;
+      padding: 9px 13px;
+      border: 0;
+      border-radius: 8px;
+      color: var(--primary-hover);
+      background: #e9edff;
+      font: 700 12px 'DM Sans', sans-serif;
+      cursor: pointer;
+    }
+
+    .file-help {
+      margin: 10px 0 0;
+      color: #818b9e;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .file-name {
+      margin-top: 8px;
+      color: var(--success);
+      font-size: 12px;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 19px 42px;
+      border-top: 1px solid var(--line);
+      background: #fcfdff;
+    }
+
+    .footer-note {
+      color: #8b94a6;
+      font-size: 11px;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      font: 700 13px 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn:focus-visible {
+      outline: 3px solid rgba(79, 102, 216, .25);
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: var(--primary);
+      box-shadow: 0 7px 16px rgba(73, 103, 213, .2);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 9px 21px rgba(73, 103, 213, .27);
+    }
+
+    .btn-secondary {
+      border-color: #e0e5ee;
+      color: #596477;
+      background: #fff;
+    }
+
+    .btn-secondary:hover {
+      border-color: #cbd3e2;
+      background: #f5f7fb;
+    }
+
+    .error-message {
+      display: none;
+      margin: 15px 0 0;
+      color: var(--danger);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .success-screen {
+      display: none;
+      padding: 58px 38px 62px;
+      text-align: center;
+    }
+
+    .success-icon {
+      display: grid;
+      place-items: center;
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 19px;
+      border-radius: 50%;
+      color: #fff;
+      background: linear-gradient(135deg, #2db887, #16845b);
+      box-shadow: 0 10px 24px rgba(22, 132, 91, .22);
+      font-size: 31px;
+    }
+
+    .success-screen h2 {
+      margin: 0 0 10px;
+      color: #20283b;
+      font: 800 25px 'Manrope', sans-serif;
+    }
+
+    .success-screen p {
+      max-width: 430px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .privacy {
+      margin: 18px 0 0;
+      color: #9aa3b2;
+      text-align: center;
+      font-size: 11px;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 24px 12px;
+      }
+
+      .brand {
+        margin-bottom: 20px;
+      }
+
+      .form-card {
+        border-radius: 19px;
+      }
+
+      .hero {
+        padding: 26px 22px 22px;
+      }
+
+      .progress-area {
+        padding: 19px 22px 0;
+      }
+
+      .form-body {
+        min-height: 0;
+        padding: 26px 22px 30px;
+      }
+
+      .form-footer {
+        align-items: stretch;
+        flex-direction: column;
+        padding: 16px 22px 19px;
+      }
+
+      .actions {
+        width: 100%;
+      }
+
+      .actions .btn {
+        flex: 1;
+      }
+
+      .step-dots {
+        gap: 6px;
+      }
+
+      .step-dot {
+        gap: 5px;
+        font-size: 10px;
+      }
+
+      .step-dot .number {
+        width: 24px;
+        height: 24px;
+        flex-basis: 24px;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+        gap: 17px;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .success-screen {
+        padding: 46px 22px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .step-dot {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .phone-row {
+        grid-template-columns: 88px minmax(0, 1fr);
+      }
+
+      .btn {
+        padding: 0 13px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    /* Compact viewport layout: keep the complete card visible on desktop */
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .page {
+      width: min(100%, 760px);
+      margin: auto;
+    }
+
+    .brand {
+      margin-bottom: 10px;
+      gap: 9px;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      flex-basis: 36px;
+      border-radius: 11px;
+      font-size: 18px;
+    }
+
+    .brand-name { font-size: 15px; }
+    .brand-caption { font-size: 11px; }
+
+    .form-card { border-radius: 19px; }
+
+    .hero { padding: 17px 30px 14px; }
+    h1 { margin: 5px 0 5px; font-size: clamp(22px, 3vw, 28px); }
+    .intro { font-size: 12px; line-height: 1.45; }
+
+    .progress-area { padding: 13px 30px 0; }
+    .progress-top { margin-bottom: 7px; font-size: 11px; }
+    .progress-track { height: 5px; }
+    .step-dots { margin-top: 10px; gap: 8px; }
+    .step-dot { gap: 6px; font-size: 11px; }
+    .step-dot .number {
+      width: 23px;
+      height: 23px;
+      flex-basis: 23px;
+      font-size: 10px;
+    }
+
+    .form-body {
+      min-height: 0;
+      max-height: max(220px, calc(100dvh - 340px));
+      overflow-y: auto;
+      padding: 17px 30px 20px;
+      scrollbar-width: thin;
+    }
+
+    .section-heading { margin-bottom: 4px; font-size: 18px; }
+    .section-help { margin-bottom: 15px; font-size: 12px; line-height: 1.45; }
+    .field-grid { gap: 12px 15px; }
+
+    .field > label,
+    .field > .field-label {
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+
+    .field input:not([type="radio"]):not([type="checkbox"]):not([type="file"]),
+    .field select,
+    .field textarea {
+      min-height: 39px;
+      padding: 8px 11px;
+      border-radius: 9px;
+      font-size: 13px;
+    }
+
+    .field textarea { min-height: 76px; }
+    .inline-options { min-height: 39px; gap: 7px; }
+    .option { min-height: 35px; padding: 0 10px; font-size: 12px; }
+    .phone-row { grid-template-columns: 90px minmax(0, 1fr); gap: 8px; }
+    .file-box { padding: 12px; }
+    .file-help { margin-top: 6px; }
+
+    .form-footer { padding: 11px 30px; }
+    .btn { min-height: 38px; padding: 0 17px; font-size: 12px; }
+    .footer-note { font-size: 10px; }
+
+    .privacy { margin-top: 8px; font-size: 10px; }
+
+    @media (max-height: 720px) and (min-width: 641px) {
+      body { padding-top: 7px; padding-bottom: 7px; }
+      .brand { margin-bottom: 6px; }
+      .hero { padding-top: 12px; padding-bottom: 11px; }
+      .progress-area { padding-top: 10px; }
+      .form-body {
+        max-height: max(180px, calc(100dvh - 290px));
+        padding-top: 12px;
+        padding-bottom: 14px;
+      }
+      .section-help { margin-bottom: 10px; }
+      .field-grid { gap: 9px 13px; }
+      .form-footer { padding-top: 8px; padding-bottom: 8px; }
+      .privacy { margin-top: 5px; }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        display: block;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 18px 12px;
+      }
+      .page { margin: 0 auto; }
+      .brand { margin-bottom: 14px; }
+      .hero { padding: 22px 20px 18px; }
+      .progress-area { padding: 16px 20px 0; }
+      .form-body {
+        max-height: none;
+        overflow: visible;
+        padding: 20px;
+      }
+      .form-footer { padding: 14px 20px 16px; }
+      .field-grid { grid-template-columns: 1fr; gap: 14px; }
+      .field.full { grid-column: auto; }
+      .privacy { margin-top: 12px; }
+    }
+
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="brand">
+      <div class="brand-mark">S</div>
+      <div>
+        <div class="brand-name">Student Portal</div>
+        <div class="brand-caption">Registration & Admissions</div>
+      </div>
+    </div>
+
+    <section class="form-card" aria-label="Student registration">
+      <header class="hero" id="formHeader">
+        <div class="eyebrow">Student registration</div>
+        <h1>Let's get you registered.</h1>
+        <p class="intro">Complete the form in a few simple steps. Your information will be used for student registration.</p>
+      </header>
+
+      <div id="formContent">
+        <div class="progress-area">
+          <div class="progress-top"><span id="stepCounter">Step 1 of 3</span><span id="progressPercent">33% completed</span></div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="step-dots" aria-label="Registration progress">
+            <div class="step-dot active" data-dot="0"><span class="number">1</span><span>Student details</span></div>
+            <div class="step-dot" data-dot="1"><span class="number">2</span><span>Contact & course</span></div>
+            <div class="step-dot" data-dot="2"><span class="number">3</span><span>Final details</span></div>
+          </div>
+        </div>
+
+        <form id="registrationForm" novalidate>
+          <div class="form-body">
+            <!-- STEP 1 -->
+            <section class="step-panel active" data-step="0">
+              <h2 class="section-heading">Student details</h2>
+              <p class="section-help">Let's start with some basic information about the student.</p>
+              <div class="field-grid">
+                <div class="field">
+                  <label for="firstName">First name <span class="required">*</span></label>
+                  <input id="firstName" name="firstName" type="text" placeholder="Enter first name" autocomplete="given-name" required>
+                </div>
+                <div class="field">
+                  <label for="lastName">Last name <span class="required">*</span></label>
+                  <input id="lastName" name="lastName" type="text" placeholder="Enter last name" autocomplete="family-name" required>
+                </div>
+                <div class="field">
+                  <label for="rollNo">Roll number <span class="required">*</span></label>
+                  <input id="rollNo" name="rollNo" type="text" placeholder="e.g. 23MCA001" required>
+                </div>
+                <div class="field">
+                  <label for="fatherName">Father's name <span class="required">*</span></label>
+                  <input id="fatherName" name="fatherName" type="text" placeholder="Enter father's name" required>
+                </div>
+                <div class="field">
+                  <label for="dob">Date of birth <span class="required">*</span></label>
+                  <input id="dob" name="dob" type="date" required>
+                </div>
+                <div class="field">
+                  <span class="field-label">Gender <span class="required">*</span></span>
+                  <div class="inline-options">
+                    <label class="option"><input type="radio" name="gender" value="Male" required> Male</label>
+                    <label class="option"><input type="radio" name="gender" value="Female"> Female</label>
+                    <label class="option"><input type="radio" name="gender" value="Other"> Other</label>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- STEP 2 -->
+            <section class="step-panel" data-step="1">
+              <h2 class="section-heading">Contact & course</h2>
+              <p class="section-help">Add your contact information and select your current academic programme.</p>
+              <div class="field-grid">
+                <div class="field full">
+                  <label for="mobile">Mobile number <span class="required">*</span></label>
+                  <div class="phone-row">
+                    <select id="countryCode" name="countryCode" aria-label="Country code">
+                      <option value="+91">+91</option>
+                      <option value="+1">+1</option>
+                      <option value="+44">+44</option>
+                      <option value="+61">+61</option>
+                    </select>
+                    <input id="mobile" name="mobile" type="tel" inputmode="numeric" placeholder="Enter mobile number" pattern="[0-9]{7,15}" required>
+                  </div>
+                </div>
+                <div class="field full">
+                  <label for="email">Email address <span class="required">*</span></label>
+                  <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+                </div>
+                <div class="field">
+                  <label for="password">Create password <span class="required">*</span></label>
+                  <input id="password" name="password" type="password" placeholder="At least 8 characters" minlength="8" autocomplete="new-password" required>
+                </div>
+                <div class="field">
+                  <label for="city">City <span class="required">*</span></label>
+                  <input id="city" name="city" type="text" placeholder="Enter your city" autocomplete="address-level2" required>
+                </div>
+                <div class="field">
+                  <label for="course">Course <span class="required">*</span></label>
+                  <select id="course" name="course" required>
+                    <option value="">Select current course</option>
+                    <option>BCA</option>
+                    <option>MCA</option>
+                    <option>B.Tech</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="department">Department <span class="required">*</span></label>
+                  <select id="department" name="department" required>
+                    <option value="">Select department</option>
+                    <option>CSE</option>
+                    <option>IT</option>
+                    <option>ECE</option>
+                    <option>Civil</option>
+                    <option>Mechanical</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <!-- STEP 3 -->
+            <section class="step-panel" data-step="2">
+              <h2 class="section-heading">Final details</h2>
+              <p class="section-help">Upload a student photograph and provide your address before submitting.</p>
+              <div class="field-grid">
+                <div class="field full">
+                  <label for="photo">Student photograph</label>
+                  <div class="file-box">
+                    <input id="photo" name="photo" type="file" accept="image/*">
+                    <p class="file-help">Choose a JPG, PNG or other image file. Maximum recommended size: 5 MB.</p>
+                    <div class="file-name" id="fileName" aria-live="polite"></div>
+                  </div>
+                </div>
+                <div class="field full">
+                  <label for="address">Residential address <span class="required">*</span></label>
+                  <textarea id="address" name="address" placeholder="Enter your complete residential address" required></textarea>
+                </div>
+                <div class="field full">
+                  <label class="option" style="width:fit-content; padding:10px 13px;">
+                    <input id="confirmInfo" type="checkbox" required>
+                    I confirm that the information provided is accurate. <span class="required">*</span>
+                  </label>
+                </div>
+              </div>
+              <p class="error-message" id="submitError" role="alert">Please review the required fields before submitting.</p>
+            </section>
+
+            <p class="error-message" id="stepError" role="alert">Please complete the required fields to continue.</p>
+          </div>
+
+          <footer class="form-footer">
+            <span class="footer-note">* Required fields</span>
+            <div class="actions">
+              <button type="button" class="btn btn-secondary" id="backBtn" style="display:none;">Back</button>
+              <button type="button" class="btn btn-primary" id="nextBtn">Next step&nbsp; →</button>
+              <button type="submit" class="btn btn-primary" id="submitBtn" style="display:none;">Submit registration&nbsp; ✓</button>
+            </div>
+          </footer>
+        </form>
+      </div>
+
+      <div class="success-screen" id="successScreen" role="status" aria-live="polite">
+        <div class="success-icon">✓</div>
+        <h2>Registration complete!</h2>
+        <p>Your information has been submitted in this demo. Thank you for completing the student registration form.</p>
+      </div>
+    </section>
+    <p class="privacy">Your information is handled securely in this form demo.</p>
+  </main>
+
+  <script>
+    const form = document.getElementById('registrationForm');
+    const panels = [...document.querySelectorAll('.step-panel')];
+    const dots = [...document.querySelectorAll('.step-dot')];
+    const progressFill = document.getElementById('progressFill');
+    const stepCounter = document.getElementById('stepCounter');
+    const progressPercent = document.getElementById('progressPercent');
+    const backBtn = document.getElementById('backBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const stepError = document.getElementById('stepError');
+    let currentStep = 0;
+
+    function showStep(step) {
+      currentStep = step;
+      panels.forEach((panel, index) => panel.classList.toggle('active', index === step));
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === step);
+        dot.classList.toggle('completed', index < step);
+        dot.querySelector('.number').textContent = index < step ? '✓' : String(index + 1);
+      });
+      const percent = Math.round(((step + 1) / panels.length) * 100);
+      progressFill.style.width = percent + '%';
+      stepCounter.textContent = `Step ${step + 1} of ${panels.length}`;
+      progressPercent.textContent = `${percent}% completed`;
+      backBtn.style.display = step === 0 ? 'none' : 'inline-block';
+      nextBtn.style.display = step === panels.length - 1 ? 'none' : 'inline-block';
+      submitBtn.style.display = step === panels.length - 1 ? 'inline-block' : 'none';
+      stepError.style.display = 'none';
+      document.getElementById('submitError').style.display = 'none';
+      document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function validateCurrentStep() {
+      const fields = [...panels[currentStep].querySelectorAll('input, select, textarea')];
+      let firstInvalid = null;
+      fields.forEach(field => {
+        if (field.type === 'file' && !field.required) return;
+        if (!field.checkValidity()) {
+          if (!firstInvalid) firstInvalid = field;
+        }
+      });
+      if (firstInvalid) {
+        stepError.textContent = firstInvalid.validationMessage || 'Please complete the required fields to continue.';
+        stepError.style.display = 'block';
+        firstInvalid.reportValidity();
+        firstInvalid.focus();
+        return false;
+      }
+      stepError.style.display = 'none';
+      return true;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (validateCurrentStep() && currentStep < panels.length - 1) showStep(currentStep + 1);
+    });
+
+    backBtn.addEventListener('click', () => {
+      if (currentStep > 0) showStep(currentStep - 1);
+    });
+
+    document.getElementById('photo').addEventListener('change', event => {
+      const file = event.target.files[0];
+      const label = document.getElementById('fileName');
+      if (!file) { label.textContent = ''; return; }
+      if (file.size > 5 * 1024 * 1024) {
+        event.target.value = '';
+        label.textContent = 'File is larger than 5 MB. Please choose a smaller image.';
+        label.style.color = 'var(--danger)';
+        return;
+      }
+      label.textContent = `Selected: ${file.name}`;
+      label.style.color = 'var(--success)';
+    });
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (!validateCurrentStep()) {
+        document.getElementById('submitError').style.display = 'block';
+        return;
+      }
+      // Front-end demo only: connect this form to a backend to store registrations.
+      document.getElementById('formContent').style.display = 'none';
+      document.getElementById('formHeader').style.display = 'none';
+      document.getElementById('successScreen').style.display = 'block';
+    });
+
+    showStep(0);
+  </script>
+</body>
+</html>
